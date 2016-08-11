@@ -13,7 +13,7 @@ Customize & Run all the published Docker ASP.NET application templates and many 
 
 ### ASP.NET Hello Web
 
-[![Customize and Run](https://dl.dropboxusercontent.com/u/4090128/dchq-customize-and-run.png)](https://www.dchq.io/landing/products.html#/library?org=DCHQ&bl=2c91802d5244241d0152527faac31e62)
+[![Customize and Run](https://dl.dropboxusercontent.com/u/4090128/dchq-customize-and-run.png)](https://www.dchq.io/landing/products.html#/library?org=DCHQ&bl=2c9180875663d1ca015676b65c8655fd)
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 aspnet:
@@ -27,7 +27,7 @@ aspnet:
 
 ### Nginx and ASP.NET
 
-[![Customize and Run](https://dl.dropboxusercontent.com/u/4090128/dchq-customize-and-run.png)](https://www.dchq.io/landing/products.html#/library?org=DCHQ&bl=2c91802d5244241d015247fbea0b5579)
+[![Customize and Run](https://dl.dropboxusercontent.com/u/4090128/dchq-customize-and-run.png)](https://www.dchq.io/landing/products.html#/library?org=DCHQ&bl=2c9180865663cf27015676b7c3836226)
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 nginx:
@@ -39,24 +39,23 @@ nginx:
     - !plugin
       id: 0H1Nk
       restart: true
-      lifecycle: on_create, post_scale_out:AppServer, post_scale_in:AppServer
+      lifecycle: on_create, post_scale_out:aspnet, post_scale_in:aspnet
       arguments:
         # Use container_private_ip if you're using Docker networking
-        - servers=server {{node | container_private_ip}}:8080;
+        - servers=server {{aspnet | container_private_ip}}:5004;
         # Use container_hostname if you're using Weave networking
-        #- servers=server {{AppServer | container_hostname}}:8080;
+        #- servers=server {{aspnet | container_hostname}}:5004;
 aspnet:
   image: dchq/aspnet-helloweb:latest
   mem_min: 100m
   host: host1
-  cpu_shares: 1
   publish_all: false
   cluster_size: 1
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ### Apache HTTP Server and Node.js
 
-[![Customize and Run](https://dl.dropboxusercontent.com/u/4090128/dchq-customize-and-run.png)](https://www.dchq.io/landing/products.html#/library?org=DCHQ&bl=2c91802d5244241d0152480e5c605990)
+[![Customize and Run](https://dl.dropboxusercontent.com/u/4090128/dchq-customize-and-run.png)](https://www.dchq.io/landing/products.html#/library?org=DCHQ&bl=2c9180875663d1ca015676b8c03e5612)
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 http-lb:
@@ -68,17 +67,16 @@ http-lb:
     - !plugin
       id: uazUi
       restart: true
-      lifecycle: on_create, post_scale_out:AppServer, post_scale_in:AppServer
+      lifecycle: on_create, post_scale_out:aspnet, post_scale_in:aspnet
       arguments:
         # Use container_private_ip if you're using Docker networking
-        - BalancerMembers=BalancerMember http://{{node | container_private_ip}}:8080
+        - BalancerMembers=BalancerMember http://{{aspnet | container_private_ip}}:5004
         # Use container_hostname if you're using Weave networking
-        #- BalancerMembers=BalancerMember http://{{node | container_hostname}}:8080
+        #- BalancerMembers=BalancerMember http://{{aspnet | container_hostname}}:5004
 aspnet:
   image: dchq/aspnet-helloweb:latest
   mem_min: 100m
   host: host1
-  cpu_shares: 1
   publish_all: false
   cluster_size: 1
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
