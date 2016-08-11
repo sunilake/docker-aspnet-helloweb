@@ -2,6 +2,8 @@
 <img src="http://www.hypergrid.com/wp-content/themes/hypergrid/img/logo.png" alt="" />
 </figure>
 
+This project was cloned from the official Microsoft repository: **<https://github.com/aspnet/Home/tree/dev/samples/1.0.0-rc1-final/HelloWeb>**
+
 To run & manage this simple Docker ASP.NET "Hello Web" application on 18 different clouds and virtualization platforms (including vSphere, OpenStack, AWS, Rackspace, Microsoft Azure, Google Compute Engine, DigitalOcean, IBM SoftLayer, etc.), make sure that you either:
 -   **Sign Up for HyperForm SaaS** -- <http://dchq.io>, or
 -   **Download HyperForm On-Premise Standard Edition for free** -- <http://dchq.co/hyperform-on-premise.html>
@@ -53,7 +55,7 @@ aspnet:
   cluster_size: 1
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-### Apache HTTP Server and Node.js
+### Apache HTTP Server and ASP.NET
 
 [![Customize and Run](https://dl.dropboxusercontent.com/u/4090128/dchq-customize-and-run.png)](https://www.dchq.io/landing/products.html#/library?org=DCHQ&bl=2c9180875663d1ca015676b8c03e5612)
 
